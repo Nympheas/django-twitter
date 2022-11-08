@@ -22,7 +22,7 @@ class SignupSerializer(serializers.ModelSerializer):
                 'message': 'This email address has been occupied.'
             })
         
-        if User.objects.filter(email.data['email'].lower()).exists():
+        if User.objects.filter(email=data['email'].lower()).exists():
             raise exceptions.ValidationError({
                 'message': 'This email address has occupied.'
             })
