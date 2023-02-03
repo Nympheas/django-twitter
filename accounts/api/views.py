@@ -4,13 +4,12 @@ from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.decorators import action 
 from rest_framework.permissions import AllowAny 
-from accounts.api.serializers import UserSerializer
 from django.contrib.auth import (
     authenticate as django_authenticate,
     login as django_login,
     logout as django_logout,
 )
-from accounts.api.serializers import SignupSerializer, LoginSerializer
+from accounts.api.serializers import SignupSerializer, LoginSerializer, UserSerializer
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
