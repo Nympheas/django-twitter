@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # project apps
     'accounts',
     "debug_toolbar",
+    "tweets"
 ]
 
 REST_FRAMEWORK = {
