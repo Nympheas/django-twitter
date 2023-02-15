@@ -1,7 +1,8 @@
-from django.contrib.auth.models import User
-from rest_framework import serializers
-from friendships.models import Friendship
 from accounts.api.serializers import UserSerializer
+from friendships.models import Friendship
+from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
+
 
 class FriendshipSerializerForCreate(serializers.ModelSerializer):
     from_user_id = serializers.IntegerField()
@@ -14,14 +15,14 @@ class FriendshipSerializerForCreate(serializers.ModelSerializer):
     def validate(self, attrs):
         if attrs['from_user_id'] == attrs['to_user_id']:
             raise ValidationError({
-                'message': 'from_user_id and to_user_id should be diffenerent'
+                'message': 'from_user_id and to_user_id should be different'
             })
         return attrs
     
     def create(self, validated_data):
         from_user_id = validated_data['from_user_id']
         to_user_id = validated_data['to_user_id']
-        return Fridenship.objects.create(
+        return Friendship.objects.create(
             from_user_id=from_user_id,
             to_user_id=to_user_id,
         )

@@ -1,4 +1,7 @@
 from django.db import models
+
+# Create your models here.
+from django.db import models
 from django.contrib.auth.models import User
 from tweets.models import Tweet
 
@@ -14,4 +17,4 @@ class NewsFeed(models.Model):
         ordering = ('user', '-created_at',)
 
     def __str__(self):
-        return f'{self.created_at} inbox of {self.user}: {self.user_id}'
+        return f'{self.created_at} inbox of {self.user}: {self.tweet}'

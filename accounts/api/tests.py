@@ -60,8 +60,8 @@ class AccountApiTests(TestCase):
         response = self.client.get(LOGIN_STATUS_URL)
         self.assertEqual(response.data['has_logged_in'], True)
 
-        # 测试必需用 post
-        response = self.client.get(LOGIN_URL)
+        # 测试必须用 post
+        response = self.client.get(LOGOUT_URL)
         self.assertEqual(response.status_code, 405)
 
         # 改用 post  成功 logout
@@ -101,7 +101,7 @@ class AccountApiTests(TestCase):
 
         # 测试用户名太长
         response = self.client.post(SIGNUP_URL, {
-            'username': 'user is tooooooooooooooooooo loooooooooooooooooooog',
+            'username': 'username is tooooooooooooooooo loooooooong',
             'email': 'someone@jiuzhang.com',
             'password': 'any password',
         })
