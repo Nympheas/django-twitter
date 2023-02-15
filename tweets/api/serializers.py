@@ -1,6 +1,5 @@
-from django.contrib.auth.models import User
-from rest_framework import serializers
 from accounts.api.serializers import UserSerializer
+from rest_framework import serializers
 from tweets.models import Tweet
 
 class TweetSerializer(serializers.ModelSerializer):

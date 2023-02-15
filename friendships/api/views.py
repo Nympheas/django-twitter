@@ -1,10 +1,14 @@
-from rest_framework import viewsets
-from django.contrib.auth.models import User
-from rest_framework.decorators import action 
-from rest_framework.permissions import AllowAny 
-from rest_framework import permissions
-from friendships.api.serializers import FollowingSerializer, FollowingSerializer, FriendshipSerializerForCreate
+from rest_framework import viewsets, status
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.response import Response
 from friendships.models import Friendship
+from friendships.api.serializers import (
+    FollowingSerializer,
+    FollowerSerializer,
+    FriendshipSerializerForCreate,
+)
+from django.contrib.auth.models import User
 
 class FriendshipViewSet(viewsets.GenericViewSet):
     queryset = User.objects.all()
@@ -27,7 +31,7 @@ class FriendshipViewSet(viewsets.GenericViewSet):
             status=status.HTTP_200_OK,
         )
 
-    @action(methods=['POST'], detail=True, permission_classes=[permissions.IsAuthenticated])
+    @action(methods=['POST'], detail=True, permission_classes=[IsAuthenticated])
     def follow(self, request, pk):
         if Friendship.objects.filter(from_user=request.user, to_user=pk).exists():
             return Response({
@@ -46,7 +50,7 @@ class FriendshipViewSet(viewsets.GenericViewSet):
         serializer.save()
         return Response({'success': True}, status=status.HTTP_201_CREATED)
 
-    @action(methods=['POST'], detail=True, permission_classes=[permissions.IsAuthenticated])
+    @action(methods=['POST'], detail=True, permission_classes=[IsAuthenticated])
     def unfollow(self, request, pk):
         if request.user.id == int(pk):
             return Response({

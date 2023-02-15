@@ -1,3 +1,4 @@
+from newsfeeds.models import NewsFeed
 from friendships.services import FriendshipService
 
 class NewsFeedService(object):
@@ -5,7 +6,7 @@ class NewsFeedService(object):
     def fanout_to_followers(cls, tweet):
         newsfeeds = [
             NewsFeed(user=follower, tweet=tweet)
-            for follower in FriendshipService.get_followers(tweet)
+            for follower in FriendshipService.get_followers(tweet.user)
         ]
         newsfeeds.append(NewsFeed(user=tweet.user, tweet=tweet))
-        newsfeeds.objects.bulk_create(newsfeeds)
+        NewsFeed.objects.bulk_create(newsfeeds)

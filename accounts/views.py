@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User, Group
+from django.shortcuts import render
 
 
 # Create your views here.

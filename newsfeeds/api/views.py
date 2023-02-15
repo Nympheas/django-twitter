@@ -1,11 +1,12 @@
 from rest_framework import viewsets, status
-from rest_framework import permissions
-from newsfeeds.api.serializers import NewsFeedSerializer
-from newsfeeds.models import NewsFeed
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from newsfeeds.models import NewsFeed
+from newsfeeds.api.serializers import NewsFeedSerializer
 
 class NewsFeedViewSet(viewsets.GenericViewSet):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return NewsFeed.objects.filter(user=self.request.user)

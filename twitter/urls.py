@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
-from friendships.api.views import FriendshipViewSet
-from newsfeeds.api.views import NewsFeedViewSet
 
 from accounts.api.views import UserViewSet, AccountViewSet
 from comments.api.views import CommentViewSet
+from friendships.api.views import FriendshipViewSet
+from newsfeeds.api.views import NewsFeedViewSet
 from tweets.api.views import TweetViewSet
 
 router = routers.DefaultRouter()
