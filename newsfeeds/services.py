@@ -1,3 +1,5 @@
+from friendships.services import FriendshipService
+
 class NewsFeedService(object):
     @classmethod
     def fanout_to_followers(cls, tweet):

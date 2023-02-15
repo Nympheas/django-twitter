@@ -1,5 +1,8 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework import permissions
+from newsfeeds.api.serializers import NewsFeedSerializer
+from newsfeeds.models import NewsFeed
+from rest_framework.response import Response
 
 class NewsFeedViewSet(viewsets.GenericViewSet):
     permission_classes = [permissions.IsAuthenticated]
